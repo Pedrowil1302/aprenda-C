@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int idade; // Declara uma variável inteira para armazenar a idade.
+    const int IDADE_MINIMA_DIRIGIR = 18; // Define a constante para a idade mínima.
+
+    // Solicita ao usuário que insira a idade.
+    printf("Digite a idade da pessoa: ");
+    // Lê a idade e armazena na variável 'idade'.
+    scanf("%d", &idade);
+
+    // Estrutura Condicional: Verifica se a idade é maior ou igual à idade mínima para dirigir.
+    if (idade >= IDADE_MINIMA_DIRIGIR) {
+        // Bloco 'if': Executado se a condição for verdadeira (idade >= 18).
+        printf("Pode dirigir.\n");
+    } else {
+        // Bloco 'else': Executado se a condição for falsa (idade < 18).
+        printf("Nao pode dirigir.\n");
+    }
+
+    return 0; // Indica que o programa terminou com sucesso.
+}
