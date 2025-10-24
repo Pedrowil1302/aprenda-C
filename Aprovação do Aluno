@@ -1,21 +1,23 @@
 #include <stdio.h>
 
 int main() {
-    int numero; // Declara uma variável inteira para armazenar o número lido.
+    float nota; // Declara uma variável float para a nota, permitindo valores decimais.
+    const int NOTA_MINIMA = 60; // Define uma constante para a nota mínima de aprovação.
 
-    // Solicita ao usuário que insira um número.
-    printf("Digite um numero inteiro: ");
-    // Lê o número inteiro e armazena na variável 'numero'.
-    scanf("%d", &numero);
+    // Solicita ao usuário que insira a nota.
+    printf("Digite a nota do aluno (0 a 100): ");
+    // Lê a nota e armazena na variável 'nota'.
+    scanf("%f", &nota);
 
-    // Estrutura Condicional: Verifica se o número é múltiplo de 3.
-    if (numero % 3 == 0) {
-        // Bloco 'if': Executado se a condição for verdadeira (o número é múltiplo de 3).
-        printf("O numero %d e multiplo de 3.\n", numero);
+    // Estrutura Condicional: Verifica se a nota é maior ou igual à nota mínima.
+    if (nota >= NOTA_MINIMA) {
+        // Bloco 'if': Executado se a condição for verdadeira (nota >= 60).
+        printf("Aluno aprovado.\n");
     } else {
-        // Bloco 'else': Executado se a condição for falsa (o número não é múltiplo de 3).
-        printf("O numero %d nao e multiplo de 3.\n", numero);
+        // Bloco 'else': Executado se a condição for falsa (nota < 60).
+        printf("Aluno reprovado.\n");
     }
 
     return 0; // Indica que o programa terminou com sucesso.
 }
+3. Permissão para dirigir
