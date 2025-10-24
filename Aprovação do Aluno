@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int numero; // Declara uma variável inteira para armazenar o número lido.
+
+    // Solicita ao usuário que insira um número.
+    printf("Digite um numero inteiro: ");
+    // Lê o número inteiro e armazena na variável 'numero'.
+    scanf("%d", &numero);
+
+    // Estrutura Condicional: Verifica se o número é múltiplo de 3.
+    if (numero % 3 == 0) {
+        // Bloco 'if': Executado se a condição for verdadeira (o número é múltiplo de 3).
+        printf("O numero %d e multiplo de 3.\n", numero);
+    } else {
+        // Bloco 'else': Executado se a condição for falsa (o número não é múltiplo de 3).
+        printf("O numero %d nao e multiplo de 3.\n", numero);
+    }
+
+    return 0; // Indica que o programa terminou com sucesso.
+}
