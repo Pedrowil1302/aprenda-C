@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char letra; // Declara uma variável char para armazenar a letra.
+    char letra_min; // Variável para armazenar a letra em minúsculo.
+
+    // Solicita ao usuário que insira uma letra.
+    printf("Digite uma letra: ");
+    // Lê o caractere e armazena na variável 'letra'.
+    scanf(" %c", &letra); // O espaço antes de %c ignora espaços em branco ou quebras de linha anteriores.
+    
+    // Converte a letra para minúsculo para simplificar a verificação.
+    letra_min = tolower(letra);
+
+    // Estrutura Condicional: Verifica se a letra (em minúsculo) é uma vogal.
+    if (letra_min == 'a' || letra_min == 'e' || letra_min == 'i' || letra_min == 'o' || letra_min == 'u') {
+        // Bloco 'if': Executado se for vogal.
+        printf("A letra e vogal.\n");
+    } else {
+        // Bloco 'else': Executado se não for vogal.
+        printf("A letra nao e vogal.\n");
+    }
+
+    return 0; // Indica que o programa terminou com sucesso.
+}
