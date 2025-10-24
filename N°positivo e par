@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    int numero; // Declara uma variável inteira para armazenar o número lido.
+
+    // Solicita ao usuário que insira um número inteiro.
+    printf("Digite um numero inteiro: ");
+    // Lê o número e armazena na variável 'numero'.
+    scanf("%d", &numero);
+
+    // Estrutura Condicional: Verifica se o número é positivo (> 0).
+    if (numero > 0) {
+        // Bloco 'if' principal: O número é positivo.
+        
+        // Dentro do positivo, verifica se ele é par.
+        if (numero % 2 == 0) {
+            // Bloco 'if' aninhado: O número é positivo E par.
+            printf("O numero e positivo e par.\n");
+        } else {
+            // Bloco 'else' aninhado: O número é positivo E ímpar.
+            printf("O numero e positivo e impar.\n");
+        }
+    } else {
+        // Bloco 'else' principal: O número não é positivo (é zero ou negativo).
+        printf("O numero nao e positivo.\n");
+    }
+
+    return 0; // Indica que o programa terminou com sucesso.
+}
