@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+float nota[5], soma=0, media;
+int i;
+for(i=0; i<5;i++){
+    printf("digite uma nota %d:", i + 1);
+    scanf("%f", &nota[1]);
+    soma += nota[1];
+}
+media = soma / 5;
+printf("\nmedia = %.2f",media);
+return 0;
+}
