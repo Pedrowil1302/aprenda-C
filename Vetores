@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+int i, numeros[5];
+for(i=0; i <5; i++){
+    printf("digite o %d numero:", i + 1);
+    scanf("%d", &numeros[i]);
+}
+        printf("\nValores digitados:\n");
+        for(i = 0; i < 5; i ++){
+         printf("%d", numeros[1]);
+}
+return 0;
+}
