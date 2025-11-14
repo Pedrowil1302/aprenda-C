@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+// Definindo o número de nomes e o tamanho máximo de cada nome
+#define NUM_NOMES 8
+#define TAM_MAX_NOME 50
+
+int main() {
+    // Declaração: Matriz de caracteres para 8 nomes (strings)
+    char nomes[NUM_NOMES][TAM_MAX_NOME]; 
+    
+    // 1. Leitura dos nomes
+    printf("Digite %d nomes:\n", NUM_NOMES);
+    for (int i = 0; i < NUM_NOMES; i++) {
+        printf("Nome %d: ", i + 1);
+        // Usando scanf para ler a string (evita problemas com leitura de espaços)
+        // O & não é usado para strings (vetores de caracteres) exceto na dimensão 0
+        scanf("%s", nomes[i]); 
+    }
+    
+    // 2. Exibição dos nomes
+    printf("\nOs nomes armazenados sao:\n");
+    for (int i = 0; i < NUM_NOMES; i++) {
+        printf("%s\n", nomes[i]);
+    }
+    
+    return 0;
+}
