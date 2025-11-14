@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+#define TAMANHO 5
+
+void inverter_vetor(int v[], int tam) {
+    int aux;
+    // O loop só precisa ir até a metade para não inverter de volta
+    for (int i = 0; i < tam / 2; i++) { 
+        // Troca v[i] com v[tam - 1 - i]
+        aux = v[i];
+        v[i] = v[tam - 1 - i];
+        v[tam - 1 - i] = aux;
+    }
+}
+
+int main() {
+    int vetor[TAMANHO];
+    
+    // 1. Leitura do vetor
+    printf("Digite %d numeros inteiros:\n", TAMANHO);
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("Elemento %d: ", i + 1);
+        scanf("%d", &vetor[i]);
+    }
+
+    // 2. Inversão
+    inverter_vetor(vetor, TAMANHO);
+    
+    // 3. Exibição do vetor invertido
+    printf("\nVetor na ordem invertida:\n");
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
