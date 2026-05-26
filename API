@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <curl/curl.h>
+#include <cjson/cJSON.h>
+
+// Estrutura para armazenar a resposta da API na memória
+struct MemoryStruct {
+    char *memory;
+    size_t size;
+};
+
+// Função de callback que o cURL usa para salvar os dados recebidos
+static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t realsize = size * nmemb;
+    struct MemoryStruct *mem = (struct MemoryStruct *)userp;
+
+    char *ptr = realloc(mem->memory, mem->size + realsize + 1);
+    if(ptr == NULL) {
+        printf("Erro: falta de memoria!\n");
+        return 0;
+    }
+
+    mem->memory = ptr;
+    memcpy(&(mem->memory[mem->size]), contents, realsize);
+    mem->size += realsize;
+    mem->memory[mem->size] = 0;
+
+    return realsize;
+}
+
+int main(void) {
+    CURL *curl_handle;
+    CURLcode res;
+
+    struct MemoryStruct chunk;
+    chunk.memory = malloc(1);  // Aloca espaço inicial
+    chunk.size = 0;            // Inicialmente sem dados
+
+    // Inicializa o ambiente do cURL
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl_handle = curl_easy_init();
+
+    if(curl_handle) {
+        // Define a URL da API (buscando o post ID 1)
+        curl_easy_setopt(curl_handle, CURLOPT_URL, "https://jsonplaceholder.typicode.com/posts/1");
+        
+        // Passa a função de callback para processar os dados recebidos
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+        
+        // Passa a nossa estrutura para salvar os dados dentro dela
+        curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)&chunk);
+
+        // Executa a requisição HTTP
+        res = curl_easy_perform(curl_handle);
+
+        // Verifica se houve erros na requisição
+        if(res != CURLE_OK) {
+            fprintf(stderr, "Falha na requisicao: %s\n", curl_easy_strerror(res));
+        } else {
+            // Se deu certo, vamos parsear o JSON recebido
+            cJSON *json = cJSON_Parse(chunk.memory);
+            if (json == NULL) {
+                printf("Erro ao parsear o JSON.\n");
+            } else {
+                // Extrai os campos do JSON
+                cJSON *id = cJSON_GetObjectItemCaseSensitive(json, "id");
+                cJSON *title = cJSON_GetObjectItemCaseSensitive(json, "title");
+
+                // Exibe os dados extraídos na tela
+                printf("=== DADOS DA API ===\n");
+                if (cJSON_IsNumber(id)) printf("ID: %d\n", id->valueint);
+                if (cJSON_IsString(title)) printf("Titulo: %s\n", title->valuestring);
+                printf("====================\n");
+
+                // Libera a memória do objeto JSON
+                cJSON_Delete(json);
+            }
+        }
+
+        // Limpa o ponteiro do cURL
+        curl_easy_cleanup(curl_handle);
+        free(chunk.memory);
+    }
+
+    // Limpa a inicialização global do cURL
+    curl_global_cleanup();
+
+    return 0;
+}
